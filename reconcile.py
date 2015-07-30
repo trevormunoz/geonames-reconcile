@@ -113,11 +113,11 @@ def search(raw_query, query_type='/geonames/all'):
         query_type_meta = default_query
     query_index = query_type_meta[0]['index']
     try:
-        url = api_base_url + query_index  + '=' + urllib.quote(query)
+        url = api_base_url + query_index  + '=' + urllib.parse.quote(query)
         app.logger.debug("GeoNames API url is " + url)
         resp = requests.get(url)
         results = resp.json()
-    except Exception, e:
+    except Exception as e:
         app.logger.warning(e)
         return out
     for position, item in enumerate(results['geonames']):
